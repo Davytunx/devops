@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
 import authRouter from '#routes/auth.route.js';
+import securityMiddleware from '#middlewares/security.middleware.js';
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.use(
     stream: { write: message => logger.info(message.trim()) },
   })
 );
+
+app.use(securityMiddleware);
 
 app.get('/', (req, res) => {
   logger.info('Hello from Acquisitions!');
